@@ -1,0 +1,34 @@
+#!/bin/bash
+electronApps="open-lens, spotify, discord" # known electron apps
+posCommand="xdotool getmouselocation | sed -s 's/x:\([0-9]\+\).*/\1/'"
+y=$(eval $posCommand)
+echo $y
+
+if [ "$y" -le 3840 ]
+then
+  echo "opening as HiDPI"
+  "$@"
+else
+  checkCommand="which $1-scaled | grep -v 'not found'"
+  checkElectronCommand="echo $electronApps | grep -w $1"
+
+  if [ "$(eval $checkCommand)" ]
+  then
+    echo "opening as SCALED-customcommand"
+    command="$1-scaled"
+    shift
+    "$command" "$@"
+  elif [ "$(eval $checkElectronCommand)" ]
+  then
+    echo "opening as SCALED-electron"
+    command=$1
+    shift
+    "$command" --force-device-scale-factor=1 "$@"
+  else
+    echo "opening as SCALED via envvars"
+    export QT_SCALE_FACTOR=0.75
+    export GDK_SCALE=0.75
+    export QT_AUTO_SCREEN_SCALE_FACTOR=0
+    "$@"
+  fi
+fi

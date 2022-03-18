@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir /tmp/chrome2
+rsync -av --delete --exclude=/Singleton* --exclude=/Session* ~/.config/google-chrome/ /tmp/chrome2/
+google-chrome-stable --user-data-dir=/tmp/chrome2/ --force-device-scale-factor=1
+
+
+
