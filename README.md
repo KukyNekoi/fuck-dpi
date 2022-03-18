@@ -49,3 +49,5 @@ Why? Because there is a high chance that if you have an application entry, it's 
 ---
 
 Finally, I wish you luck on your journey for the automatic DPI, and I hope that you find this useful... because we're pretty much fucked up until wayland is fully adopted.
+
+Maybe if I feel like to, I'll try to see if I can make plasma to automatically use this script from its launcher... but I'm not sure if it's worth it.
